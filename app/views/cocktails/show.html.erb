@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+      <h1><%= @cocktail.name %></h1>
+      <ul>
+        <% @cocktail.doses.each do |dose| %>
+          <% if dose.persisted? %>
+            <li>
+              <%= dose.description %> <%= dose.ingredient.name %>
+              <%= link_to "&times;".html_safe, dose_path(dose), method: :delete %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <p>
+        <%= render "doses/form", cocktail: @cocktail, dose: @dose %>
+      </p>
+      <%= link_to 'Back', root_path %> <!-- because I have put it in the root index, so no cocktails_path -->
+    </div>
+  </div>
+</div>
